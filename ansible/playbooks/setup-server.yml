@@ -1,0 +1,29 @@
+- name: server configuration
+  hosts: webserver
+  become: yes
+
+  tasks:
+  
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+ 
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Start Nginx Service
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+

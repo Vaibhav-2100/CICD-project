@@ -1,0 +1,14 @@
+- hosts: localhost
+  become: yes
+
+  tasks:
+    
+   - name: Pull nginx docker image
+     command: docker pull nginx
+
+   - name: Remove old container if exist
+     command: docker rm -f devops-demo
+     ignore_errors: yes
+ 
+   - name: Run nginx conatiner
+     command: docker run -d -p 8080:80 --name devops-demo nginx
